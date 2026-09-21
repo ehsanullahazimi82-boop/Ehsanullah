@@ -4,425 +4,1028 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ehsanullah Azimi | Personal Portfolio</title>
+    <style>
+        :root {
+            --bg-1: #0b1020;
+            --bg-2: #111827;
+            --bg-3: #1f2937;
+            --glass: rgba(15, 23, 42, 0.68);
+            --glass-strong: rgba(17, 24, 39, 0.85);
+            --card: rgba(15, 23, 42, 0.78);
+            --border: rgba(255, 255, 255, 0.12);
+            --text: #edf6ff;
+            --muted: #c7d6ee;
+            --primary: #7c3aed;
+            --secondary: #16c2d5;
+            --pink: #ff4ecd;
+            --orange: #ff9d42;
+            --green: #2dd4bf;
+            --yellow: #facc15;
+            --shadow: 0 25px 60px rgba(14, 31, 68, 0.45);
+        }
+
+        * { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(124, 58, 237, 0.65), transparent 28%),
+                radial-gradient(circle at top right, rgba(22, 194, 213, 0.48), transparent 30%),
+                radial-gradient(circle at bottom left, rgba(255, 78, 205, 0.36), transparent 30%),
+                linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            width: min(1200px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            backdrop-filter: blur(18px);
+            background: rgba(11, 16, 32, 0.62);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-inner {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .brand {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #fff, #8ae7ff, #ff8bd0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            padding: 10px 15px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            color: var(--muted);
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+        }
+
+        .hero {
+            padding: 60px 0 24px;
+        }
+
+        .hero-box {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 28px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.28), rgba(22, 194, 213, 0.18), rgba(255, 78, 205, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+            padding: 36px;
+            overflow: hidden;
+        }
+
+        .hero-box::before,
+        .hero-box::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(10px);
+            opacity: 0.8;
+        }
+
+        .hero-box::before {
+            width: 220px;
+            height: 220px;
+            background: rgba(124, 58, 237, 0.34);
+            right: -40px;
+            top: -28px;
+        }
+
+        .hero-box::after {
+            width: 180px;
+            height: 180px;
+            background: rgba(22, 194, 213, 0.28);
+            left: -30px;
+            bottom: -25px;
+        }
+
+        .hero-copy,
+        .hero-photo-wrap {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tiny-label {
+            display: inline-block;
+            padding: 8px 14px;
+            margin-bottom: 18px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #f3e8ff;
+            background: linear-gradient(90deg, rgba(124,58,237,0.35), rgba(255,78,205,0.22));
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        h1 {
+            margin: 0 0 14px;
+            font-size: clamp(2.5rem, 6vw, 4.6rem);
+            line-height: 1.02;
+            letter-spacing: -0.05em;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #8ae7ff, #7dd3fc, #e9d5ff, #f9a8d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-copy p {
+            margin: 0;
+            max-width: 630px;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-weight: 800;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, var(--pink), var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 14px 30px rgba(124, 58, 237, 0.35);
+        }
+
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--text);
+        }
+
+        .hero-photo-wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: min(100%, 360px);
+            padding: 18px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 26px;
+            border: 2px solid rgba(255,255,255,0.12);
+        }
+
+        .floating-stats {
+            position: absolute;
+            bottom: 18px;
+            right: -5px;
+            background: rgba(11, 16, 32, 0.85);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 14px 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .floating-stats strong {
+            display: block;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .floating-stats span {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        main {
+            padding-bottom: 50px;
+        }
+
+        .section {
+            padding: 42px 0;
+        }
+
+        .section-head {
+            margin-bottom: 22px;
+        }
+
+        .section-head h2 {
+            margin: 0 0 8px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.04em;
+        }
+
+        .section-head p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-card {
+            padding: 28px;
+            background: linear-gradient(135deg, rgba(124,58,237,0.16), rgba(22,194,213,0.08), rgba(255,78,205,0.08));
+        }
+
+        .about-card p {
+            margin: 0 0 14px;
+            color: var(--muted);
+            font-size: 1.02rem;
+        }
+
+        .skills-grid,
+        .project-grid,
+        .contact-grid,
+        .education-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .skills-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+
+        .skill-item {
+            padding: 22px 18px;
+            text-align: center;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text);
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .skill-item:nth-child(3n+1) { border-top: 3px solid var(--pink); }
+        .skill-item:nth-child(3n+2) { border-top: 3px solid var(--green); }
+        .skill-item:nth-child(3n+3) { border-top: 3px solid var(--orange); }
+
+        .skill-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(124,58,237,0.18);
+        }
+
+        .experience-list {
+            display: grid;
+            gap: 22px;
+        }
+
+        .exp-card {
+            padding: 26px 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exp-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink), var(--secondary), var(--orange));
+        }
+
+        .exp-card h3 {
+            margin: 0 0 6px;
+            font-size: 1.42rem;
+        }
+
+        .exp-card h4 {
+            margin: 0;
+            color: #dbeafe;
+        }
+
+        .date-pill {
+            display: inline-block;
+            margin: 12px 0 10px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(45, 212, 191, 0.12);
+            color: #bbf7d0;
+            font-size: 0.77rem;
+            font-weight: 700;
+        }
+
+        .exp-card p,
+        .exp-card li,
+        .info-card p,
+        .project-card p,
+        .contact-card li,
+        .table-wrap td,
+        .hobby-list li,
+        .award-list li,
+        .profile-list li {
+            color: var(--muted);
+        }
+
+        .exp-card ul {
+            margin: 12px 0 0 18px;
+            padding: 0;
+        }
+
+        .education-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .info-card,
+        .project-card,
+        .contact-card,
+        .status-card {
+            padding: 24px;
+        }
+
+        .info-card h3,
+        .project-card h3,
+        .contact-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.28rem;
+        }
+
+        .areas-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .areas-list > li {
+            padding: 22px 18px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .areas-list strong {
+            display: block;
+            margin-bottom: 12px;
+            color: #fff;
+            font-size: 1.08rem;
+        }
+
+        .areas-list ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+
+        .project-grid {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: linear-gradient(180deg, rgba(124,58,237,0.10), rgba(255,255,255,0.01));
+        }
+
+        .tag {
+            align-self: flex-start;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(255, 157, 66, 0.12);
+            color: #ffdba4;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .table-wrap {
+            overflow: hidden;
+            border-radius: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        th {
+            background: rgba(124,58,237,0.18);
+            color: white;
+        }
+
+        td {
+            background: rgba(255,255,255,0.015);
+        }
+
+        .award-list,
+        .hobby-list,
+        .profile-list,
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .award-list li,
+        .hobby-list li,
+        .profile-list li,
+        .contact-list li {
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .contact-grid {
+            grid-template-columns: 1fr 1.2fr;
+            align-items: start;
+        }
+
+        .contact-card a {
+            color: #bff7ff;
+        }
+
+        .form-card {
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(45,212,191,0.10), rgba(255,78,205,0.08), rgba(124,58,237,0.10));
+        }
+
+        form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field label {
+            font-weight: 700;
+            color: #e6f6ff;
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(11,16,32,0.7);
+            color: white;
+            outline: none;
+            font: inherit;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            border-color: rgba(124,58,237,0.8);
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.18);
+        }
+
+        .row-inline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+        }
+
+        .row-inline input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--pink);
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        button[type="submit"],
+        input[type="reset"] {
+            border: none;
+            border-radius: 999px;
+            padding: 14px 20px;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--pink), var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 12px 30px rgba(124,58,237,0.28);
+        }
+
+        input[type="reset"] {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--text);
+        }
+
+        button[type="submit"]:hover,
+        input[type="reset"]:hover {
+            transform: translateY(-2px);
+        }
+
+        footer {
+            padding: 30px 0 40px;
+            text-align: center;
+            color: var(--muted);
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        @media (max-width: 820px) {
+            .nav-inner {
+                flex-direction: column;
+                justify-content: center;
+                padding: 10px 0;
+            }
+
+            .hero-box {
+                grid-template-columns: 1fr;
+                padding: 24px 18px;
+            }
+
+            .hero-copy {
+                text-align: center;
+            }
+
+            .cta-row {
+                justify-content: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!--Header-->
     <header>
-        <h1>Ehsanullah Azimi</h1>
-        <p>
-            Visa Manager | Computer Scientce Student | Web Development Learner
-        </p>
+        <div class="topbar">
+            <div class="container nav-inner">
+                <div class="brand">Ehsanullah</div>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#education">Education</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#awards">Awards</a>
+                    <a href="#languages">Languages</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
 
-        <nav>
-            <a href="#">About</a>
-            <a href="Skills">Skills</a>
-            <a href="experience">Experience</a>
-            <a href="education">Education</a>
-            <a href="projects">Projects</a>
-            <a href="awards">Awards</a>
-            <a href="languages">Languages</a>
-            <a href="Contact">Contact</a>
-        </nav>
+        <div class="container hero">
+            <div class="hero-box">
+                <div class="hero-copy">
+                    <div class="tiny-label">Portfolio</div>
+                    <h1>Hello, I'm <span class="highlight">Ehsanullah Azimi</span></h1>
+                    <p>
+                        Visa Manager | Computer Science Student | Web Development Learner
+                    </p>
+                    <div class="cta-row">
+                        <a class="button primary" href="#contact">Hire Me</a>
+                        <a class="button secondary" href="#projects">View Projects</a>
+                    </div>
+                </div>
+
+                <div class="hero-photo-wrap">
+                    <div class="photo-frame">
+                        <img src="Ehsan.jpeg" alt="Ehsanullah Azimi portrait">
+                        <div class="floating-stats">
+                            <strong>5+</strong>
+                            <span>Years of Growth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
-    <hr>
 
-    <!--Main-->
     <main>
-        <!--About Me-->
-        <section id="about">
-            <h2>About Me</h2>
-
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure harum dignissimos, 
-                expedita ut libero praesentium error dicta at rerum reiciendis
-                incidunt! Molestias rerum minima molestiae impedit in adipisci et eveniet.
-            </p>
-            <p>
-                My name is Ehsanullah Azimi. I am a Computer Since student and a professional
-                Visa Manager with experience in visa processing, customer service, event coordination, 
-                and technical problem solving.
-            </p>
-
-            <p>
-                I am currently developing my skills in web development,
-                programming, databases, networking, and information
-                technology. My goal is to continue learning and build
-                professional digital solutions.
-            </p>
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>About Me</h2>
+                    <p>Professional, ambitious, and committed to personal and technical growth.</p>
+                </div>
+                <div class="card about-card">
+                    <p>
+                        My name is Ehsanullah Azimi. I am a Computer Science student and a professional
+                        Visa Manager with experience in visa processing, customer service, event coordination,
+                        and technical problem solving.
+                    </p>
+                    <p>
+                        I am currently developing my skills in web development, programming, databases,
+                        networking, and information technology. My goal is to continue learning and build
+                        professional digital solutions that create value and improve user experiences.
+                    </p>
+                    <p>
+                        I enjoy combining service, organization, and technology to solve real-world problems
+                        and contribute meaningfully in professional environments.
+                    </p>
+                </div>
+            </div>
         </section>
 
-        <hr> 
-
-        <!--Skills-->
-        <section id="skills">
-            <h2>My Skills</h2>
-            <ul>
-                <li>HTML Web Development</li>
-                <li>C++ Programming</li>
-                <li>Database Management</li>
-                <li>Information Technology</li>
-                <li>Computer Networking</li>
-                <li>Software Installation</li>
-                <li>Technical Troubleshooting</li>
-                <li>Microsoft Office</li>
-                <li>Project Management</li>
-                <li>Customer Service</li>
-            </ul>
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>My Skills</h2>
+                    <p>Core professional strengths built through study, service, and practical learning.</p>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-item">HTML Web Development</div>
+                    <div class="skill-item">C++ Programming</div>
+                    <div class="skill-item">Database Management</div>
+                    <div class="skill-item">Information Technology</div>
+                    <div class="skill-item">Computer Networking</div>
+                    <div class="skill-item">Software Installation</div>
+                    <div class="skill-item">Technical Troubleshooting</div>
+                    <div class="skill-item">Microsoft Office</div>
+                    <div class="skill-item">Project Management</div>
+                    <div class="skill-item">Customer Service</div>
+                </div>
+            </div>
         </section>
-        <hr> 
-        <!--Professional Experince-->
-        <section id="experince">
-            <h2>Professional Experience</h2>
-            <article>
-                <h3>Visa Manager</h3>
-                <h4>Air Gateway Tourist & Travel Agency</h4>
-                <p>
-                    September 2021 - Present
-                </p>
-                <p>
-                    I manage visa applications and assist clients throughout
-                    the visa processing procedure. I also work with sensitive
-                    applicant information and ensure that applications are
-                    properly prepared.
-                </p>
-                <h4>Main Responsibilities</h4>
-                <ul>
-                    <li>Processing visa applications</li>
-                    <li>Checking application documents</li>
-                    <li>Communicating with clients</li>
-                    <li>Managing sensitive information</li>
-                    <li>Coordinating with Visa Unit staff</li>
-                    <li>Collecting visa fees</li>
-                    <li>Passport pickup and delivery</li>
+
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Professional Experience</h2>
+                    <p>Hands-on experience in coordination, client communication, and document processing.</p>
+                </div>
+                <div class="experience-list">
+                    <article class="card exp-card">
+                        <h3>Visa Manager</h3>
+                        <h4>Air Gateway Tourist & Travel Agency</h4>
+                        <span class="date-pill">September 2021 - Present</span>
+                        <p>
+                            I manage visa applications and support clients throughout the visa process,
+                            while handling sensitive documentation and maintaining accuracy and professionalism.
+                        </p>
+                        <h4>Main Responsibilities</h4>
+                        <ul>
+                            <li>Processing visa applications</li>
+                            <li>Checking application documents</li>
+                            <li>Communicating with clients</li>
+                            <li>Managing sensitive information</li>
+                            <li>Coordinating with Visa Unit staff</li>
+                            <li>Collecting visa fees</li>
+                            <li>Passport pickup and delivery</li>
+                        </ul>
+                    </article>
+
+                    <article class="card exp-card">
+                        <h3>Event Planner / Coordinator</h3>
+                        <h4>Hult Prize</h4>
+                        <span class="date-pill">November 2020 - August 2021</span>
+                        <p>
+                            I worked on event planning and coordination including venue arrangements,
+                            communication with vendors, logistics, and coordination with participants.
+                        </p>
+                        <h4>Main Responsibilities</h4>
+                        <ul>
+                            <li>Event planning</li>
+                            <li>Venue coordination</li>
+                            <li>Vendor communication</li>
+                            <li>Event logistics</li>
+                            <li>Participant coordination</li>
+                            <li>Event reporting</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Education</h2>
+                    <p>Academic foundation and continued growth in computer science and technology.</p>
+                </div>
+                <div class="education-grid">
+                    <article class="card info-card">
+                        <h3>Bachelor of Computer Science</h3>
+                        <p>Kardan University</p>
+                        <span class="date-pill">January 2024 - Present</span>
+                    </article>
+
+                    <article class="card info-card">
+                        <h3>Baccalaureate</h3>
+                        <p>Abdul Ghafor Nadim High School</p>
+                        <span class="date-pill">2007 - 2019</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Computer Science Areas</h2>
+                    <p>Focused areas that reflect my current learning path and professional curiosity.</p>
+                </div>
+                <ul class="areas-list">
+                    <li>
+                        <strong>Web Development</strong>
+                        <ul>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Programming</strong>
+                        <ul>
+                            <li>C++</li>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Database</strong>
+                        <ul>
+                            <li>Database Management</li>
+                            <li>SQL</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Technology Focus</strong>
+                        <ul>
+                            <li>Networking</li>
+                            <li>Information Technology</li>
+                            <li>Cybersecurity</li>
+                            <li>Artificial Intelligence</li>
+                        </ul>
+                    </li>
                 </ul>
-            </article>
+            </div>
+        </section>
 
-            <article>
-                <h3>Event Planner / Coordinator</h3>
-                <h4>Hult Prize</h4>
-                <p>
-                    November 2020 - August 2021
-                </p>
-                <p>
-                    I worked on event planning and coordination, including
-                    venue arrangements, communication with vendors,
-                    logistics, and coordination with participants.
-                </p>
-                <h4>Main Responsibilities</h4>
-                <ul>
-                    <li>Event planning</li>
-                    <li>Venue coordination</li>
-                    <li>Vendor communication</li>
-                    <li>Event logistics</li>
-                    <li>Participant coordination</li>
-                    <li>Event reporting</li>
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>My Projects</h2>
+                    <p>Academic and applied work reflecting technical interest and problem-solving mindset.</p>
+                </div>
+                <div class="project-grid">
+                    <article class="card project-card">
+                        <span class="tag">Workflow</span>
+                        <h3>Visa Application System Improvement</h3>
+                        <p>Worked on improving the organization and processing workflow of visa applications.</p>
+                    </article>
 
+                    <article class="card project-card">
+                        <span class="tag">Web</span>
+                        <h3>Academic Web Development Project</h3>
+                        <p>Created a web development project as part of my Computer Science studies.</p>
+                    </article>
+
+                    <article class="card project-card">
+                        <span class="tag">Database</span>
+                        <h3>Database Management System</h3>
+                        <p>Worked on an academic database management project to understand data organization.</p>
+                    </article>
+
+                    <article class="card project-card">
+                        <span class="tag">Programming</span>
+                        <h3>C++ Calculation Program</h3>
+                        <p>Created a basic calculation program using C++ while studying programming concepts.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="awards" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Awards & Achievements</h2>
+                    <p>Recognition for service quality, organization, and consistent performance.</p>
+                </div>
+                <ul class="award-list">
+                    <li>Outstanding Visa Processing Performance</li>
+                    <li>Event Coordination Excellence Award</li>
                 </ul>
-            </article>
+            </div>
         </section>
 
-        <hr> 
-        <!--Education-->
-        <section id="education">
-            <h2>Education</h2>
-            <article>
-                <h3>Bachelor of Computer Science</h3>
-                <p>
-                    Kardan University
-                </p>
-                <p>
-                    January 2024 - Present
-                </p>
-            </article>
-
-            <article>
-                <h3>Baccalaureate</h3>
-                <p>
-                    Abdul Ghafor Nadim High School
-                </p>
-                <p>
-                    2007 - 2019
-                </p>
-            </article>
+        <section id="languages" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Languages</h2>
+                    <p>Communication skills across professional and personal environments.</p>
+                </div>
+                <div class="card status-card">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Language</th>
+                                    <th>Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pashto</td>
+                                    <td>Native</td>
+                                </tr>
+                                <tr>
+                                    <td>Dari</td>
+                                    <td>Fluent</td>
+                                </tr>
+                                <tr>
+                                    <td>English</td>
+                                    <td>Professional</td>
+                                </tr>
+                                <tr>
+                                    <td>Urdu</td>
+                                    <td>Conversational</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <hr> 
-        <!--Computer Since-->
-        <section id="computer since">
-            <h2>Computer Science Areas</h2>
-            <p>
-                These are some of the areas I am learning or interested in:
-            </p>
-            <ol>
-                <li>
-                    Web Development
-                    <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JavaScript</li>
-                    </ul>
-                </li>
-                <li>
-                    Programming
-                    <ul>
-                        <li>C++</li>
-                        <li>Python</li>
-                        <li>JavaScript</li>
-                    </ul>
-                </li>
-                <li>
-                    Database
-                    <ul>
-                        <li>Database Management</li>
-                        <li>SQL</li>
-                    </ul>
-                </li>
-                <li>Networking</li>
-                <li>Information Technology</li>
-                <li>Cybersecurity</li>
-                <li>Artificial Intelligence</li>
-            </ol>
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Hobbies & Interests</h2>
+                    <p>Activities that support learning, balance, and long-term growth.</p>
+                </div>
+                <ul class="hobby-list">
+                    <li>Reading and Learning</li>
+                    <li>Traveling</li>
+                    <li>Programming and Coding</li>
+                    <li>Event Planning</li>
+                    <li>Sports and Fitness</li>
+                </ul>
+            </div>
         </section>
 
-        <hr>
-        <!--Projects-->
-        <section id="projects">
-            <h2>My Projects</h2>
-            <article>
-                <h3>Visa Application System Improvement</h3>
-                <p>
-                    Worked on improving the organization and processing
-                    workflow of visa applications.
-                </p>
-            </article>
-
-            <article>
-                <h3>Academic Web Development Project</h3>
-                <p>
-                    Created a web development project as part of my
-                    Computer Science studies.
-                </p>
-            </article>
-
-            <article>
-                <h3>Database Management System</h3>
-                <p>
-                    Worked on an academic database management project
-                    to understand data organization and database concepts.
-                </p>
-            </article>
-            <article>
-                <h3>C++ Calculation Program</h3>
-                <p>
-                    Created a basic calculation program using C++ while
-                    studying programming concepts.
-                </p>
-            </article>
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Personal Information</h2>
+                    <p>Quick profile summary and key details.</p>
+                </div>
+                <ul class="profile-list">
+                    <li><strong>Full Name:</strong> Ehsanullah Azimi</li>
+                    <li><strong>Profession:</strong> Visa Manager</li>
+                    <li><strong>Education:</strong> Computer Science Student</li>
+                    <li><strong>Location:</strong> Kabul, Afghanistan</li>
+                </ul>
+            </div>
         </section>
 
-        <hr>
-        <!--Awards-->
-        <section id="awards">
-            <h2>Awards & Achievements</h2>
-            <ul>
-                <li>
-                    Outstanding Visa Processing Performance
-                </li>
-                <li>
-                    Event Coordination Excellence Award
-                </li>
-            </ul>
-        </section>
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Contact Me</h2>
+                    <p>I’m open to networking, opportunities, and meaningful collaboration.</p>
+                </div>
 
-        <hr>
-        <!--Languages-->
-        <section id="languages">
-            <h2>Languages</h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Language</th>
-                        <th>Level</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Pashto</td>
-                        <td>Native</td>
-                    </tr>
-                    <tr>
-                        <td>Dari</td>
-                        <td>Fluent</td>
-                    </tr>
-                    <tr>
-                        <td>English</td>
-                        <td>Professional</td>
-                    </tr>
-                    <tr>
-                        <td>Urdu</td>
-                        <td>Conversational</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+                <div class="contact-grid">
+                    <div class="card contact-card">
+                        <h3>Contact Details</h3>
+                        <ul class="contact-list">
+                            <li>Email: <a href="mailto:ehsanullahazimi82@gmail.com">ehsanullahazimi82@gmail.com</a></li>
+                            <li>Phone: <a href="tel:+93783222249">+93 783 222 249</a></li>
+                            <li>Location: Kabul, Afghanistan</li>
+                            <li>LinkedIn: <a href="#">My LinkedIn Profile</a></li>
+                            <li>Facebook: <a href="#">My Facebook Profile</a></li>
+                            <li>GitHub: <a href="#">My GitHub Profile</a></li>
+                            <li>Twitter: <a href="#">My Twitter Profile</a></li>
+                        </ul>
+                    </div>
 
-        <hr>
-        <!--Hobbies-->
-        <section id="hobbies">
-            <h2>My Hobbies & Interests</h2>
-            <ul>
-                <li>Reading and Learning</li>
-                <li>Traveling</li>
-                <li>Programming and Coding</li>
-                <li>Event Planning</li>
-                <li>Sports and Fitness</li>
-            </ul>
-        </section>
+                    <div class="card form-card">
+                        <h3>Send Me a Message</h3>
+                        <form>
+                            <div class="field">
+                                <label for="name">Full Name</label>
+                                <input id="name" type="text" placeholder="Enter your name">
+                            </div>
 
-        <hr>
-        <!--Personal Information-->
-        <section id="personal information">
-            <h2>Personal Information</h2>
-            <dl>
-                <dt>Full Name</dt>
-                <dd>Ehsanullah Azimi</dd>
+                            <div class="field">
+                                <label for="email">Email</label>
+                                <input id="email" type="email" placeholder="Enter your email">
+                            </div>
 
-                <dt>Profession</dt>
-                <dd>Visa Manager</dd>
+                            <div class="field">
+                                <label for="phone">Phone Number</label>
+                                <input id="phone" type="tel" placeholder="Enter your phone number">
+                            </div>
 
-                <dt>Education</dt>
-                <dd>Computer Science Student</dd>
+                            <div class="field">
+                                <label for="message">Message</label>
+                                <textarea id="message" rows="4" placeholder="Write your message here..."></textarea>
+                            </div>
 
-                <dt>Location</dt>
-                <dd>Kabul, Afghanistan</dd>
-            </dl>
-        </section>
+                            <label class="row-inline">
+                                <input type="checkbox">
+                                Remember Me
+                            </label>
 
-        <hr>
-        <!--Contact-->
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <p>
-                If you would like to contact me, you can use the information
-                below.
-            </p>
-
-            <ul>
-                <li>
-                    Email:
-                    <a href="ehsanullahazimi82@gmail.com">
-                        ehsanullahazimi82@gmail.com.com
-                    </a>
-                </li>
-
-                <li>
-                    Phone:
-                    <a href="tel:+93783222249">
-                        +93 783 222 249
-                    </a>
-                </li>
-
-                <li>
-                    Location:
-                    Kabul, Afghanistan
-                </li>
-
-                <li>
-                    LinkedIn:
-                    <a href="#">
-                        My LinkedIn Profile
-                    </a>
-                </li>
-
-                <li>
-                    Facebook:
-                    <a href="#">
-                        My Facebook Profile
-                    </a>
-                </li>
-
-                <li>
-                    GitHub:
-                    <a href="#">
-                        My GitHub Profile
-                    </a>
-                </li>
-
-                <li>
-                    Twitter:
-                    <a href="#">
-                        My Twitter Profile
-                    </a>
-                </li>
-            </ul>
-        </section>
-
-        <hr>
-        <!--Contact Form-->
-        <section id="contact-from">
-            <h2>Send Me a Message</h2>
-
-            <form>
-                <label for="name">
-                    Full Name
-                </label>
-                <input
-                    id="name"
-                    type="text"
-                    placeholder="Enter your name"
-                >
-                <br><br>
-                <label for="email">
-                    Email
-                </label>
-                <input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                >
-                <br><br>
-                <label for="phone">
-                    Phone Number
-                </label>
-                <input
-                    id="phone"
-                    type="tel"
-                    placeholder="Enter your phone number"
-                >
-                <br><br>
-                <label for="password">
-                    Password
-                </label>
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="Enter your password"
-                >
-                <br><br>
-                <label>
-                    <input type="checkbox">
-                    Remember Me
-                </label>
-                <br><br>
-                <button type="submit">
-                    Send Message
-                </button>
-                <input
-                    type="reset"
-                    value="Clear"
-                >
-            </form>
-
+                            <div class="button-row">
+                                <button type="submit">Send Message</button>
+                                <input type="reset" value="Clear">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>
-            &copy; 2026 Ehsanullah Azimi. All Rights Reserved.
-        </p>
-        <p>
-            Personal Portfolio Website
-        </p>
+        <div class="container">
+            <p>&copy; 2026 Ehsanullah Azimi. All Rights Reserved.</p>
+            <p>Personal Portfolio Website</p>
+        </div>
     </footer>
 </body>
 </html>
